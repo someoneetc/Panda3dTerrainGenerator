@@ -31,12 +31,21 @@ class TestTerrainGenerator(ShowBase):
 
         TerrainGenerator.generateTerrain(shape,texture_paths,nature_path,1000,"test", force=True)
 
-        self.terrain, self.tRoot, diobestia = TerrainGenerator.loadTerrain("test")
+        self.terrain, self.tRoot= TerrainGenerator.loadTerrain("test")
         self.tRoot.reparentTo(render)
 
-        camera.setPos(diobestia.getPos() + (100,0,0))
-        camera.lookAt(diobestia.getPos())
+        self.screenshotReleased = True
+        inputState.watchWithModifiers('screenshot','space')
+        taskMgr.add(self.inputTask,'inputTask')
 
+    def inputTask(self,task):
+        if inputState.isSet('screenshot'):
+            if self.screenshotReleased:
+                self.screenshot(namePrefix='screenshot')
+            self.screenshotReleased = False
+        else:
+            self.screenshotReleased = True
+        return task.cont
 
 
 app = TestTerrainGenerator()

@@ -71,7 +71,7 @@ def loadTerrain(path):
             mod.setPos(Vec3(pos[0],pos[1],z_pos))
             mod.reparentTo(render)
 
-    return terrain, tRoot, mod
+    return terrain, tRoot
 
 
 MAPMAKER_PATH = 'mapmaker/build/bin/mapmaker/mapmaker'
