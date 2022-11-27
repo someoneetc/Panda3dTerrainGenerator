@@ -22,9 +22,13 @@ class Game(ShowBase):
 
 
         shape = (1025,1025)
-        TerrainGenerator.generateTerrain(20,shape,0,10,0.05,"test.pnm")
-
-        
+        z_scale = 100
+        texture_paths = [
+                    'content/textures/grass.JPG',
+                    'content/textures/snow.JPG'
+                ]
+        TerrainGenerator.generateTerrain(shape,z_scale,texture_paths,"test")
+        exit(0)
 
         """self.terrain = GeoMipTerrain('terrain')
         self.terrain.setHeightfield('test.pnm')
