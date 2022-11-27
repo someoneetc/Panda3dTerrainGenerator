@@ -1,0 +1,5 @@
+Pillow
+numpy
+noise
+panda3d
+pyyaml
