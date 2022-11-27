@@ -65,11 +65,10 @@ def loadTerrain(path):
             bounds = mod.getTightBounds()
             mod_height = abs(bounds[0].z - bounds[1].z)
 
-            mod.setScale(10)
+            #mod.setScale(10)
             print(mod_height)
-            z_pos = terrain.getElevation(pos[0],pos[1]) * tRoot.get_sz() + mod_height * 10
+            z_pos = terrain.getElevation(pos[0],pos[1]) * tRoot.get_sz()
             mod.setPos(Vec3(pos[0],pos[1],z_pos))
-            mod.setP(90)
             mod.reparentTo(render)
 
     return terrain, tRoot, mod
@@ -168,13 +167,15 @@ def generateTerrain(shape,texture_paths,nature_path,natural_objects_count,path,f
     terrain = GeoMipTerrain('terrain')
     terrain.setHeightfield(heightmap_path)
     slopeImg = terrain.makeSlopeImage()
-    nature = list(filter(lambda x: x.endswith('.obj'),os.listdir(nature_path)))
-    nature = list(map(lambda x: os.path.join(nature_path,x),nature))
+    #nature = list(filter(lambda x: x.endswith('.obj'),os.listdir(nature_path)))
+    nature = list(map(lambda x: os.path.join(nature_path,x),os.listdir(nature_path)))
     max_size = find_biggest(nature)
 
     object_positions = {}
     for obj in nature:
         object_positions[obj] = []
+
+    print(nature)
 
     
     count = 0

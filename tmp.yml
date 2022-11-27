@@ -1,0 +1,17 @@
+generator:
+  name: diamond-square
+  output:
+    filename: test/heightmap.pnm
+    parameters:
+      sea_level: 0
+      shaded: false
+    type: grayscale
+  parameters:
+    values:
+    - 0
+    - 20
+    - 40
+    - 100
+  size:
+    height: 1025
+    width: 1025
