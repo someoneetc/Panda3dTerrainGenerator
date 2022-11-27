@@ -18,3 +18,6 @@ pip install -r requirements.txt
 
 ## Generate stuff
 For the time being, only two textures are supported(a base texture and a second one which will be applied according with height). Refer to the TestTerrainGenerator.py file for an example
+
+## Screenshots
+![Image](./screenshots/screenshot.png)
