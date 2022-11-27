@@ -17,17 +17,27 @@ class TestTerrainGenerator(ShowBase):
 
         #Generate terrain
         shape = (1025,1025)
-        z_scale = 100
+
+        #textures should be put in the following order according with
+        #their role(for the time being only 3 textures are supported)
         texture_paths = [
-                    'example_textures/grass.JPG',
-                    'example_textures/snow.JPG'
+                    'example_textures/grass.JPG',#base texture
+                    'example_textures/snow.JPG',#this depends on height
+                    'example_textures/rock.JPG'#this depends on slope
                 ]
 
-        TerrainGenerator.generateTerrain(shape,z_scale,texture_paths,"test")
+        #Path to a folder which contains nature objects
+        nature_path = 'example_nature'
 
-        terrain, tRoot = TerrainGenerator.loadTerrain("test")
-        tRoot.reparentTo(render)
-        
+        TerrainGenerator.generateTerrain(shape,texture_paths,nature_path,1000,"test", force=True)
+
+        self.terrain, self.tRoot, diobestia = TerrainGenerator.loadTerrain("test")
+        self.tRoot.reparentTo(render)
+
+        camera.setPos(diobestia.getPos() + (100,0,0))
+        camera.lookAt(diobestia.getPos())
+
+
 
 app = TestTerrainGenerator()
 app.run()

@@ -23,5 +23,4 @@ For the time being, only two textures are supported(a base texture and a second 
 ![Image](./screenshots/screenshot.png)
 
 ## Credits
-["Lowpoly Nature Pack"](https://skfb.ly/otSsn) by Mongze is licensed under [Creative Commons Attribution](http://creativecommons.org/licenses/by/4.0/).
-
+["Low poly Stylized Nature Pack"](https://skfb.ly/6VZTt) by Satendra Saraswat is licensed under [Creative Commons Attribution] (http://creativecommons.org/licenses/by/4.0/).
