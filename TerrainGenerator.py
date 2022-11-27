@@ -29,11 +29,11 @@ def loadTerrain(path):
 
     #Textures setup
     ts_idx = 0
+    
     for tex in terrain_data['textures']:
         ts = TextureStage('gnd' + str(ts_idx))
         ts.setSort(ts_idx)
         texture = loader.loadTexture(tex)
-        tRoot.setTexScale(ts,1000,1000)
         tRoot.setTexture(ts,texture)
         ts_idx+=1
 
@@ -47,12 +47,16 @@ def loadTerrain(path):
     #shaders
     tRoot.setShaderInput("Heightmap",loader.loadTexture(terrain_data['heightmap']))
     tRoot.setShaderInput("SlopeImage",slope_img)
+    tRoot.setShaderInput("TexScaleFactor0",terrain_data['texture_scale_factors'][0])
+    tRoot.setShaderInput("TexScaleFactor1",terrain_data['texture_scale_factors'][1])
+    tRoot.setShaderInput("TexScaleFactor2",terrain_data['texture_scale_factors'][2])
 
     shader = Shader.load(vertex=terrain_data['vertex_shader'],
                          fragment=terrain_data['fragment_shader'],
                          lang=Shader.SL_GLSL)
 
     tRoot.setShader(shader)
+
 
 
     terrain.update()
@@ -66,7 +70,6 @@ def loadTerrain(path):
             mod_height = abs(bounds[0].z - bounds[1].z)
 
             #mod.setScale(10)
-            print(mod_height)
             z_pos = terrain.getElevation(pos[0],pos[1]) * tRoot.get_sz()
             mod.setPos(Vec3(pos[0],pos[1],z_pos))
             mod.reparentTo(render)
@@ -88,7 +91,7 @@ def find_biggest(natural_objects):
             max_size = (b_x,b_y)
     return max_size 
 
-def generateTerrain(shape,texture_paths,nature_path,natural_objects_count,path,force=False):
+def generateTerrain(shape,texture_paths,texture_scale_factors,nature_path,natural_objects_count,path,force=False):
     heightmap_path = os.path.join(path,"heightmap.pnm")
     json_path = os.path.join(path,"map.json")
     if os.path.exists(path):
@@ -99,46 +102,6 @@ def generateTerrain(shape,texture_paths,nature_path,natural_objects_count,path,f
             return
     os.mkdir(path)
     with open('tmp.yml','w+') as inputFile:
-        """
-        cfg = {
-            'seed': int(time.time()),
-            'generator': {
-                'name': "fractal",
-                'parameters':{
-                    'noise': 'gradient',
-                    'noise_parameters':{
-                        'curve': 'cubic'
-                    },
-                    'scale': 1,
-                    'octaves': 10,
-                    'lacunarity': 2.0,
-                    'persistence': 0.5
-                },
-                'size': {
-                    'width': shape[0]+1,
-                    'height': shape[1]+1
-                },
-                'output':{
-                    'type': 'grayscale',
-                    'parameters':{
-                        'sea_level': 0.5,
-                        'shaded': False 
-                    },
-                    'filename': heightmap_path 
-                },
-                'finalizer':{
-                    'name': 'playability',
-                    'parameters':{
-                        'sea_level': 0.5,
-                        'unit_size': 1,
-                        'building_size': 9,
-                        'unit_talus': 8.0,
-                        'building_talus': 2.0,
-                        'output_intermediates': False
-                    }
-                }
-            }
-        }"""
         cfg = {
             'generator': {
                 'name': 'diamond-square',
@@ -175,7 +138,6 @@ def generateTerrain(shape,texture_paths,nature_path,natural_objects_count,path,f
     for obj in nature:
         object_positions[obj] = []
 
-    print(nature)
 
     
     count = 0
@@ -203,6 +165,7 @@ def generateTerrain(shape,texture_paths,nature_path,natural_objects_count,path,f
                 'heightmap': heightmap_path,
                 'shape': shape,
                 'textures': texture_paths,
+                'texture_scale_factors': texture_scale_factors,
                 'vertex_shader': os.path.join(SHADERS,'terrain.vert'),
                 'fragment_shader': os.path.join(SHADERS,'terrain.frag'),
                 'object_positions': object_positions

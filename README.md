@@ -20,7 +20,8 @@ pip install -r requirements.txt
 The module define two functions
 ```python
 def generateTerrain(shape, #a 2-tuple
-                    texture_paths, #a path to the folder which contains the texture files
+                    texture_paths, #an array of paths
+                    texture_scale_factors, #an array of integers
                     nature_path, #a path to the folder which contains the 
                                  #natural objects to be placed randomly
                     natural_objects_count, #the number of natural objects

@@ -21,15 +21,28 @@ class TestTerrainGenerator(ShowBase):
         #textures should be put in the following order according with
         #their role(for the time being only 3 textures are supported)
         texture_paths = [
-                    'example_textures/grass.JPG',#base texture
-                    'example_textures/snow.JPG',#this depends on height
-                    'example_textures/rock.JPG'#this depends on slope
+                    'example_textures/grass/Grass003_1K_Color.jpg',#base texture
+                    'example_textures/snow/Snow006_1K_Color.jpg',#this depends on height
+                    'example_textures/rock/Rock050_1K_Color.jpg'#this depends on slope
+                ]
+
+        #the relative scale factors
+        texture_scale_factors = [
+                    10,
+                    10,
+                    10
                 ]
 
         #Path to a folder which contains nature objects
         nature_path = 'example_nature'
 
-        TerrainGenerator.generateTerrain(shape,texture_paths,nature_path,1000,"test", force=True)
+        TerrainGenerator.generateTerrain(shape,
+                                         texture_paths,
+                                         texture_scale_factors,
+                                         nature_path,
+                                         1000,
+                                         "test", 
+                                         force=True)
 
         self.terrain, self.tRoot= TerrainGenerator.loadTerrain("test")
         self.tRoot.reparentTo(render)
