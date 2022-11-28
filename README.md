@@ -26,7 +26,7 @@ def generateTerrain(generator, #one in DiamondSquare, MidpointDisplacement, Frac
                                #FastErosion, Islandize, Gaussize, Flatten, Smooth
                     finalizers, #one in ErosionScore, Playability
                     shape, #a 2-tuple
-                    texture_paths, #an array of paths
+                    texture_paths, #an array of 4 paths
                     texture_scale_factors, #an array of integers
                     nature_path, #a path to the folder which contains the 
                                  #natural objects to be placed randomly
@@ -44,13 +44,8 @@ def loadTerrain(path #the path specified with the previous method
                 )
 ```
 
-For the time being, only 3 textures are supported and should be provided in the following order:
+For the time being, only 4 textures are supported(e.g: dirt,grass,rock,snow). 
 
-    1. Base texture(e.g. grass)
-
-    2. Height-dependant texture(e.g. snow)
-
-    3. Slope-dependant texture(e.g. rock)
 Refer to the TestTerrainGenerator.py file for an example
 
 ## Screenshots
