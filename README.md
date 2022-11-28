@@ -19,7 +19,9 @@ pip install -r requirements.txt
 ## Generate stuff
 The module define two functions
 ```python
-def generateTerrain(generator, #one in DiamondSquare, MidpointDisplacement, FractalValueNoise,
+def generateTerrain(
+                    terrainGeneratorPath, #the path to this project's directory 
+                    generator, #one in DiamondSquare, MidpointDisplacement, FractalValueNoise,
                               #FractalGradientNoise, FractalSimplexNoise, FractalCellNoise,
                               #Hills
                     modifiers, #a list containing some of the following: ThermalErosion, HydraulicErosion,

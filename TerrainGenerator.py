@@ -98,7 +98,6 @@ def loadTerrain(path,terrainGeneratorPath):
     return terrain, tRoot
 
 
-MAPMAKER_PATH = 'mapmaker/build/bin/mapmaker/mapmaker'
 SHADERS = 'shaders'
 
 def find_biggest(natural_objects):
@@ -428,7 +427,8 @@ def generateCfg(generator,modifiers,finalizer,inputFile,shape,output):
     inputFile.write(yaml.dump(yaml.safe_load(str(cfg))))
 
 
-def generateTerrain(generator,modifiers,finalizer,shape,texture_paths,texture_scale_factors,nature_path,natural_objects_count,path,force=False):
+def generateTerrain(terrainGeneratorPath,generator,modifiers,finalizer,shape,texture_paths,texture_scale_factors,nature_path,natural_objects_count,path,force=False):
+    MAPMAKER_PATH = os.path.join(terrainGeneratorPath,'mapmaker/build/bin/mapmaker/mapmaker')
     tc = _typeCheck(
                     [
                         generator,

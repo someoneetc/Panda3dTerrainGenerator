@@ -39,6 +39,7 @@ class TestTerrainGenerator(ShowBase):
         nature_path = 'example_nature'
 
         TerrainGenerator.generateTerrain(
+                                         '.',
                                          TerrainGenerator.GENERATORS['FractalCellNoise'],
                                          [TerrainGenerator.MODIFIERS,TerrainGenerator.MODIFIERS['Smooth']],
                                          TerrainGenerator.FINALIZERS['Playability'],
