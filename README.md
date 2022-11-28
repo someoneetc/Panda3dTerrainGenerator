@@ -40,7 +40,8 @@ def generateTerrain(generator, #one in DiamondSquare, MidpointDisplacement, Frac
 
 ```python
 #this will return the GeoMipTerrain object and the corresponding NodePath 
-def loadTerrain(path #the path specified with the previous method
+def loadTerrain(path, #the path specified with the previous method
+                shadersPath, #the path to the folder which contains terrain.vert and terrain.frag
                 )
 ```
 
