@@ -36,13 +36,18 @@ class TestTerrainGenerator(ShowBase):
         #Path to a folder which contains nature objects
         nature_path = 'example_nature'
 
-        TerrainGenerator.generateTerrain(shape,
+        TerrainGenerator.generateTerrain(
+                                         TerrainGenerator.GENERATORS['Hills'],
+                                         [TerrainGenerator.MODIFIERS['Flatten'],TerrainGenerator.MODIFIERS['Smooth']],
+                                         TerrainGenerator.FINALIZERS['Playability'],
+                                         shape,
                                          texture_paths,
                                          texture_scale_factors,
                                          nature_path,
-                                         1000,
+                                         10,
                                          "test", 
-                                         force=True)
+                                         force=True
+                                        )
 
         self.terrain, self.tRoot= TerrainGenerator.loadTerrain("test")
         self.tRoot.reparentTo(render)

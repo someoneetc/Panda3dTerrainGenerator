@@ -30,8 +30,8 @@ void main() {
   vec4 heightMapTexel = texture2D(Heightmap,texcoord0.st);
   vec4 slopeImageTexel = texture2D(SlopeImage,texcoord0.st);
 
-  texel0 = mix(texel0,texel1,heightMapTexel.b);
-  texel0 = mix(texel0,texel2,slopeImageTexel.b);
+  texel0 = mix(texel0,texel1,heightMapTexel);
+  texel0 = mix(texel0,texel2,slopeImageTexel);
   p3d_FragColor = texel0; 
 }
 
