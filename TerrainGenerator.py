@@ -58,6 +58,8 @@ def loadTerrain(path):
     tRoot.setShaderInput("TexScaleFactor0",terrain_data['texture_scale_factors'][0])
     tRoot.setShaderInput("TexScaleFactor1",terrain_data['texture_scale_factors'][1])
     tRoot.setShaderInput("TexScaleFactor2",terrain_data['texture_scale_factors'][2])
+    tRoot.setShaderInput("TexScaleFactor3",terrain_data['texture_scale_factors'][3])
+
 
     shader = Shader.load(vertex=terrain_data['vertex_shader'],
                          fragment=terrain_data['fragment_shader'],

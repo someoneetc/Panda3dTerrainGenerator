@@ -21,13 +21,15 @@ class TestTerrainGenerator(ShowBase):
         #textures should be put in the following order according with
         #their role(for the time being only 3 textures are supported)
         texture_paths = [
-                    'example_textures/grass/Grass003_1K_Color.jpg',#base texture
-                    'example_textures/snow/Snow006_1K_Color.jpg',#this depends on height
-                    'example_textures/rock/Rock050_1K_Color.jpg'#this depends on slope
+                    'example_textures/dirt/Ground042_1K_Color.jpg',
+                    'example_textures/grass/Grass003_1K_Color.jpg',
+                    'example_textures/rock/Rock050_1K_Color.jpg',
+                    'example_textures/snow/Snow006_1K_Color.jpg',
                 ]
 
         #the relative scale factors
         texture_scale_factors = [
+                    10,
                     10,
                     10,
                     10
@@ -37,8 +39,8 @@ class TestTerrainGenerator(ShowBase):
         nature_path = 'example_nature'
 
         TerrainGenerator.generateTerrain(
-                                         TerrainGenerator.GENERATORS['Hills'],
-                                         [TerrainGenerator.MODIFIERS['Flatten'],TerrainGenerator.MODIFIERS['Smooth']],
+                                         TerrainGenerator.GENERATORS['FractalCellNoise'],
+                                         [TerrainGenerator.MODIFIERS,TerrainGenerator.MODIFIERS['Smooth']],
                                          TerrainGenerator.FINALIZERS['Playability'],
                                          shape,
                                          texture_paths,
@@ -54,6 +56,7 @@ class TestTerrainGenerator(ShowBase):
 
         self.screenshotReleased = True
         inputState.watchWithModifiers('screenshot','space')
+        self.test_var = 10000.0 
         taskMgr.add(self.inputTask,'inputTask')
 
     def inputTask(self,task):
@@ -63,6 +66,10 @@ class TestTerrainGenerator(ShowBase):
             self.screenshotReleased = False
         else:
             self.screenshotReleased = True
+
+
+        self.tRoot.setShaderInput('test_var',self.test_var)
+
         return task.cont
 
 
