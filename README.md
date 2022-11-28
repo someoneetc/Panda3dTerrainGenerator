@@ -19,7 +19,13 @@ pip install -r requirements.txt
 ## Generate stuff
 The module define two functions
 ```python
-def generateTerrain(shape, #a 2-tuple
+def generateTerrain(generator, #one in DiamondSquare, MidpointDisplacement, FractalValueNoise,
+                              #FractalGradientNoise, FractalSimplexNoise, FractalCellNoise,
+                              #Hills
+                    modifiers, #a list containing some of the following: ThermalErosion, HydraulicErosion,
+                               #FastErosion, Islandize, Gaussize, Flatten, Smooth
+                    finalizers, #one in ErosionScore, Playability
+                    shape, #a 2-tuple
                     texture_paths, #an array of paths
                     texture_scale_factors, #an array of integers
                     nature_path, #a path to the folder which contains the 
