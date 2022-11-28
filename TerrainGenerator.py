@@ -18,9 +18,9 @@ def _typeCheck(args,types):
             return (type(arg),a_type)
     return None
 
-def loadTerrain(path):
+def loadTerrain(path,shadersPath):
 
-    tc = _typeCheck([path],[str])
+    tc = _typeCheck([path,shadersPath],[str,str])
     if tc:
         raise ValueError('Expected ',repr(tc[1]), ' but got ', repr(tc[0]))
 
@@ -71,8 +71,8 @@ def loadTerrain(path):
     tRoot.setShaderInput("TexScaleFactor3",terrain_data['texture_scale_factors'][3])
 
 
-    shader = Shader.load(vertex=terrain_data['vertex_shader'],
-                         fragment=terrain_data['fragment_shader'],
+    shader = Shader.load(vertex=os.path.join(shadersPath,terrain_data['vertex_shader']),
+                         fragment=os.path.join(shadersPath,terrain_data['fragment_shader']),
                          lang=Shader.SL_GLSL)
 
     tRoot.setShader(shader)
@@ -533,8 +533,8 @@ def generateTerrain(generator,modifiers,finalizer,shape,texture_paths,texture_sc
                 'shape': shape,
                 'textures': texture_paths,
                 'texture_scale_factors': texture_scale_factors,
-                'vertex_shader': os.path.join(SHADERS,'terrain.vert'),
-                'fragment_shader': os.path.join(SHADERS,'terrain.frag'),
+                'vertex_shader': 'terrain.vert',
+                'fragment_shader': 'terrain.frag',
                 'object_positions': object_positions
             }
 

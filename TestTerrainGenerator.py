@@ -51,7 +51,7 @@ class TestTerrainGenerator(ShowBase):
                                          force=True
                                         )
 
-        self.terrain, self.tRoot= TerrainGenerator.loadTerrain("test")
+        self.terrain, self.tRoot= TerrainGenerator.loadTerrain("test",'./shaders')
         self.tRoot.reparentTo(render)
 
         self.screenshotReleased = True
