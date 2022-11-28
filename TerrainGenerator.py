@@ -12,7 +12,17 @@ import os
 
 from panda3d.core import GeoMipTerrain, TextureStage, TexGenAttrib, Shader, Texture, Vec3, CollisionRay, CollisionTraverser, CollisionHandlerQueue, CollisionNode, NodePath
 
+def _typeCheck(args,types):
+    for arg,a_type in zip(args,types):
+        if not isinstance(arg,a_type):
+            return (type(arg),a_type)
+    return None
+
 def loadTerrain(path):
+
+    tc = _typeCheck([path],[str])
+    if tc:
+        raise ValueError('Expected ',repr(tc[1]), ' but got ', repr(tc[0]))
 
     #load terrain data
     terrain_file = open(os.path.join(path,'map.json'))
@@ -419,6 +429,35 @@ def generateCfg(generator,modifiers,finalizer,inputFile,shape,output):
 
 
 def generateTerrain(generator,modifiers,finalizer,shape,texture_paths,texture_scale_factors,nature_path,natural_objects_count,path,force=False):
+    tc = _typeCheck(
+                    [
+                        generator,
+                        modifiers,
+                        finalizer,
+                        shape,
+                        texture_paths,
+                        texture_scale_factors,
+                        nature_path,
+                        natural_objects_count,
+                        path,
+                        force
+                     ],
+                    [
+                        int,
+                        list,
+                        int,
+                        tuple,
+                        list,
+                        list,
+                        str,
+                        int,
+                        str,
+                        bool
+                     ]
+                    )
+    if tc:
+        raise ValueError('Expected ',repr(tc[1]), ' but got ', repr(tc[0]))
+
     heightmap_path = os.path.join(path,"heightmap.pnm")
     json_path = os.path.join(path,"map.json")
     if os.path.exists(path):
