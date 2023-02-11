@@ -18,6 +18,12 @@ def _typeCheck(args,types):
             return (type(arg),a_type)
     return None
 
+def getHeightmap(path):
+    terrain_data = json.loads(terrain_file.read())
+    terrain_file.close()
+    return terrain_data['heightmap']
+
+
 def loadTerrain(path):
 
     tc = _typeCheck([path],[str])
