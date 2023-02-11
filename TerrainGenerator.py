@@ -498,7 +498,10 @@ def generateTerrain(terrainGeneratorPath,generator,modifiers,finalizer,shape,tex
     terrain.setHeightfield(heightmap_path)
     slopeImg = terrain.makeSlopeImage()
     #nature = list(filter(lambda x: x.endswith('.obj'),os.listdir(nature_path)))
-    nature = list(map(lambda x: os.path.join(nature_path,x),os.listdir(nature_path)))
+    if nature_path == "":
+        nature = []
+    else:
+        nature = list(map(lambda x: os.path.join(nature_path,x),os.listdir(nature_path)))
     max_size = find_biggest(nature)
 
     object_positions = {}
