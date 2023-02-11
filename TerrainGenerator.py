@@ -500,6 +500,7 @@ def generateTerrain(terrainGeneratorPath,generator,modifiers,finalizer,shape,tex
     #nature = list(filter(lambda x: x.endswith('.obj'),os.listdir(nature_path)))
     if nature_path == "":
         nature = []
+        natural_objects_count = 0
     else:
         nature = list(map(lambda x: os.path.join(nature_path,x),os.listdir(nature_path)))
     max_size = find_biggest(nature)
