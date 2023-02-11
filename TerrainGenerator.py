@@ -101,7 +101,7 @@ def loadTerrain(path,terrainGeneratorPath):
 SHADERS = 'shaders'
 
 def find_biggest(natural_objects):
-    max_size = (0.0,0.0)
+    max_size = (1.0,1.0)
     for obj in natural_objects:
         mod = loader.loadModel(obj)
         bounds = mod.getTightBounds()
