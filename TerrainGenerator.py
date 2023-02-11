@@ -19,6 +19,7 @@ def _typeCheck(args,types):
     return None
 
 def getHeightmap(path):
+    terrain_file = open(os.path.join(path,'map.json'))
     terrain_data = json.loads(terrain_file.read())
     terrain_file.close()
     return terrain_data['heightmap']
