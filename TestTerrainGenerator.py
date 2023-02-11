@@ -39,7 +39,6 @@ class TestTerrainGenerator(ShowBase):
         nature_path = 'example_nature'
 
         TerrainGenerator.generateTerrain(
-                                         '.',
                                          TerrainGenerator.GENERATORS['FractalCellNoise'],
                                          [TerrainGenerator.MODIFIERS,TerrainGenerator.MODIFIERS['Smooth']],
                                          TerrainGenerator.FINALIZERS['Playability'],
@@ -52,7 +51,7 @@ class TestTerrainGenerator(ShowBase):
                                          force=True
                                         )
 
-        self.terrain, self.tRoot= TerrainGenerator.loadTerrain("test",'.')
+        self.terrain, self.tRoot= TerrainGenerator.loadTerrain("test")
         self.tRoot.reparentTo(render)
 
         self.screenshotReleased = True

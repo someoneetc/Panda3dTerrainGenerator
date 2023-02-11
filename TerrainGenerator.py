@@ -18,9 +18,9 @@ def _typeCheck(args,types):
             return (type(arg),a_type)
     return None
 
-def loadTerrain(path,terrainGeneratorPath):
+def loadTerrain(path):
 
-    tc = _typeCheck([path,terrainGeneratorPath],[str,str])
+    tc = _typeCheck([path],[str])
     if tc:
         raise ValueError('Expected ',repr(tc[1]), ' but got ', repr(tc[0]))
 
@@ -71,6 +71,7 @@ def loadTerrain(path,terrainGeneratorPath):
     tRoot.setShaderInput("TexScaleFactor3",terrain_data['texture_scale_factors'][3])
 
 
+    terrainGeneratorPath = os.path.dirname(__file__)
     shader = Shader.load(vertex=os.path.join(os.path.join(terrainGeneratorPath,'shaders'),terrain_data['vertex_shader']),
                          fragment=os.path.join(os.path.join(terrainGeneratorPath,'shaders'),terrain_data['fragment_shader']),
                          lang=Shader.SL_GLSL)
@@ -427,8 +428,8 @@ def generateCfg(generator,modifiers,finalizer,inputFile,shape,output):
     inputFile.write(yaml.dump(yaml.safe_load(str(cfg))))
 
 
-def generateTerrain(terrainGeneratorPath,generator,modifiers,finalizer,shape,texture_paths,texture_scale_factors,nature_path,natural_objects_count,path,force=False):
-    MAPMAKER_PATH = os.path.join(terrainGeneratorPath,'mapmaker/build/bin/mapmaker/mapmaker')
+def generateTerrain(generator,modifiers,finalizer,shape,texture_paths,texture_scale_factors,nature_path,natural_objects_count,path,force=False):
+    MAPMAKER_PATH = os.path.join(os.path.dirname(__file__),'mapmaker/build/bin/mapmaker/mapmaker')
     tc = _typeCheck(
                     [
                         generator,
