@@ -10,7 +10,7 @@ import time
 import yaml
 import os 
 
-from panda3d.core import GeoMipTerrain, TextureStage, TexGenAttrib, Shader, Texture, Vec3, CollisionRay, CollisionTraverser, CollisionHandlerQueue, CollisionNode, NodePath
+from panda3d.core import GeoMipTerrain, TextureStage, TexGenAttrib, Shader, Texture, Vec3, CollisionRay, CollisionTraverser, CollisionHandlerQueue, CollisionNode, NodePath, PNMImage
 
 def _typeCheck(args,types):
     for arg,a_type in zip(args,types):
@@ -71,6 +71,7 @@ def loadTerrain(path):
 
     #shaders
     tRoot.setShaderInput("Heightmap",loader.loadTexture(terrain_data['heightmap']))
+    print(slope_img)
     tRoot.setShaderInput("SlopeImage",slope_img)
     tRoot.setShaderInput("TexScaleFactor0",terrain_data['texture_scale_factors'][0])
     tRoot.setShaderInput("TexScaleFactor1",terrain_data['texture_scale_factors'][1])
@@ -553,3 +554,15 @@ def generateTerrain(generator,modifiers,finalizer,shape,texture_paths,texture_sc
     json_file = open(json_path,"w+")
     json_file.write(json.dumps(json_data,indent=4))
     json_file.close()
+
+def sumToHeightMap(self,pathToTerrain,otherHeightmap,weight):
+    terrain_file = open(os.path.join(path,'map.json'))
+    terrain_data = json.loads(terrain_file.read())
+    terrain_file.close()
+    
+    hm = PNMImage()
+    hm.read(terrain_data['heightmap'])
+    for x in range(hm.getReadXSize()):
+        for y in range(hm.getReadYSize()):
+            hm.setXelVal(x,y,(0,0,hm.getXelVal(x,y)[2] + otherHeightmap.getXelVal(x,y)[2] * weight))
+    hm.write(terrain_data['heightmap'])
