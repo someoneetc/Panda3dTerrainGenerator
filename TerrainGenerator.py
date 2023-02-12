@@ -555,14 +555,3 @@ def generateTerrain(generator,modifiers,finalizer,shape,texture_paths,texture_sc
     json_file.write(json.dumps(json_data,indent=4))
     json_file.close()
 
-def sumToHeightMap(path,otherHeightmap,weight):
-    terrain_file = open(os.path.join(path,'map.json'))
-    terrain_data = json.loads(terrain_file.read())
-    terrain_file.close()
-    
-    hm = PNMImage()
-    hm.read(terrain_data['heightmap'])
-    for x in range(hm.getReadXSize()):
-        for y in range(hm.getReadYSize()):
-            hm.setXelVal(x,y,(0,0,hm.getXelVal(x,y)[2] + otherHeightmap.getXelVal(x,y)[2] * weight))
-    hm.write(terrain_data['heightmap'])
